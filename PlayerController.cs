@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
     public float speed = 1.0f;
     private Rigidbody rb;
+    private string PICKUP = "PickUp";
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
@@ -22,5 +23,13 @@ public class PlayerController : MonoBehaviour {
         Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
 
         rb.AddForce(movement*speed*Time.deltaTime);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == PICKUP)
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 }
